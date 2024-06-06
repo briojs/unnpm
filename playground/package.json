@@ -1,0 +1,12 @@
+{
+  "name": "playground",
+  "module": "index.ts",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "packageManager": "bun@1.1.12",
+  "type": "module",
+  "dependencies": {
+    "typescript": "^5.4.5"
+  }
+}

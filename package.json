@@ -1,0 +1,44 @@
+{
+  "name": "unnpm",
+  "version": "0.0.0",
+  "description": "Universal npm package manager for programmatic use",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "lint": "eslint . && biome check .",
+    "lint:fix": "automd && eslint . --fix && biome check --apply .",
+    "format": "biome format --write",
+    "test": "vitest",
+    "prepack": "bun run build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.0",
+    "@types/bun": "latest",
+    "eslint-config-briojs": "^0.0.5",
+    "unbuild": "^2.0.0",
+    "vitest": "^1.6.0",
+    "eslint": "^9.1.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "defu": "^6.1.4",
+    "execa": "^9.2.0",
+    "pathe": "^1.1.2"
+  }
+}
