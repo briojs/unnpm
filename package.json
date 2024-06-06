@@ -1,9 +1,10 @@
 {
   "name": "unnpm",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Universal npm package manager for programmatic use",
   "license": "MIT",
   "type": "module",
+  "repository": "briojs/unnpm",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -14,9 +15,7 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "unbuild",
     "lint": "eslint . && biome check .",
