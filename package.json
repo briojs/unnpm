@@ -1,6 +1,6 @@
 {
   "name": "unnpm",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Universal npm package manager for programmatic use",
   "license": "MIT",
   "type": "module",
