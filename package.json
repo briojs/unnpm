@@ -28,13 +28,9 @@
   "devDependencies": {
     "@biomejs/biome": "1.8.0",
     "@types/bun": "latest",
-<<<<<<< HEAD
     "eslint-config-briojs": "^0.0.9",
-=======
     "eslint": "^9.1.1",
-    "eslint-config-briojs": "^0.0.5",
     "jiti": "^1.21.3",
->>>>>>> cc0f0f69d19b03fb11423e64319f51b2c4be30b7
     "unbuild": "^2.0.0",
     "vitest": "^1.6.0"
   },
