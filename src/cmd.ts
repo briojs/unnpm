@@ -22,7 +22,7 @@ export type ActionOptions = {
 };
 
 export const isCorepackInstalled = async () => {
-  if (Bun !== undefined) {
+  if (typeof Bun !== "undefined") {
     const $ = await import('bun').then((module_) => module_.$);
 
     try {
@@ -58,7 +58,7 @@ export const runCommand = async (
       ? ['corepack', [command, ...arguments_]]
       : [command, arguments_];
 
-  if (Bun !== undefined) {
+  if (typeof Bun !== "undefined") {
     Bun.spawn([execaArguments[0], ...execaArguments[1]], {
       cwd: options.cwd,
       stdio: [

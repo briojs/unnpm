@@ -1,9 +1,6 @@
 import { addDependency, removeDependency } from "../src/cmd.ts";
 
-await addDependency("typescript", {
+addDependency("typescript", {
   dev: true,
+  silent: true
 });
-
-await Bun.sleep(5000);
-
-await removeDependency("typescript");
