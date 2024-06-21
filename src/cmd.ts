@@ -19,6 +19,11 @@ export type ActionOptions = {
    * Options for detecting package manager
    */
   detectOptions?: Omit<DetectOptions, 'cwd'>;
+
+  /**
+   * Override package manager
+   */
+  packageManager?: PackageManager;
 };
 
 export const isCorepackInstalled = async () => {
@@ -98,16 +103,16 @@ export const resolveArgs = (
     pm === 'yarn'
       ? [action, options.dev ? '--D' : '']
       : [
-          pm === 'npm' ? (action === 'add' ? 'install' : 'uninstall') : action,
-          options.dev ? '--D' : '',
-          options.global ? '-g' : '',
-        ]
+        pm === 'npm' ? (action === 'add' ? 'install' : 'uninstall') : action,
+        options.dev ? '--D' : '',
+        options.global ? '-g' : '',
+      ]
   ).filter(Boolean);
 };
 
 export const installDependencies = async (options: ActionOptions = {}) => {
   options.cwd = options.cwd ?? process.cwd();
-  const packageManager = detectPackageManager({
+  const packageManager = options.packageManager || detectPackageManager({
     cwd: options.cwd,
     ...options.detectOptions,
   });
@@ -120,7 +125,7 @@ export const addDependency = async (
   options: ActionWithArguments = {},
 ) => {
   options.cwd = options.cwd ?? process.cwd();
-  const packageManager = detectPackageManager({
+  const packageManager = options.packageManager || detectPackageManager({
     cwd: options.cwd,
     ...options.detectOptions,
   });
@@ -135,7 +140,7 @@ export const removeDependency = async (
   options: ActionWithArguments = {},
 ) => {
   options.cwd = options.cwd ?? process.cwd();
-  const packageManager = detectPackageManager({
+  const packageManager = options.packageManager || detectPackageManager({
     cwd: options.cwd,
     ...options.detectOptions,
   });

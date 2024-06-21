@@ -36,7 +36,7 @@ pm specific files. If it fails, it will default to `npm`.
 
 If there are multiple package managers detected, it throws an error, unless `strict` option is set to `false`.
 
-#### Options
+#### ParserOptions
 
 - `strict` - boolean, default `true`
 - `cwd` - string, default `process.cwd()`
