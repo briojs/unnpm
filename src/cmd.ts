@@ -92,7 +92,10 @@ export interface ActionWithArguments extends ActionOptions {
    * Installs globally
    */
   global?: boolean;
-  // TODO: add workspace support
+  /**
+   * Additional arguments
+   */
+  args?: string[];
 }
 
 export const resolveArgs = (
@@ -102,11 +105,12 @@ export const resolveArgs = (
 ) => {
   return (
     pm === 'yarn'
-      ? [action, options.dev ? '--D' : '']
+      ? [action, options.dev ? '--D' : '', ...(options.args || [])]
       : [
           pm === 'npm' ? (action === 'add' ? 'install' : 'uninstall') : action,
           options.dev ? '--D' : '',
           options.global ? '-g' : '',
+          ...(options.args || []),
         ]
   ).filter(Boolean);
 };
