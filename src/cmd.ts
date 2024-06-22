@@ -65,7 +65,7 @@ export const runCommand = async (
       : [command, arguments_];
 
   if (typeof Bun !== 'undefined') {
-    Bun.spawn([execaArguments[0], ...execaArguments[1]], {
+    Bun.spawnSync([execaArguments[0], ...execaArguments[1]], {
       cwd: options.cwd,
       stdio: [
         'pipe',
