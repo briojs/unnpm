@@ -1,7 +1,6 @@
-import { addDependency, removeDependency } from "../src/cmd.ts";
+import { addDependency, removeDependency } from '../src/cmd.ts';
 
-addDependency("typescript", {
+addDependency('typescript', {
   dev: true,
-  silent: true,
-  packageManager: "bun"
+  silent: false,
 });

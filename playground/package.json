@@ -2,10 +2,8 @@
   "name": "playground",
   "module": "index.ts",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "typescript": "^5.5.2"
   },
-  "type": "module",
-  "dependencies": {
-    "typescript": "^5.4.5"
-  }
+  "type": "module"
 }

@@ -43,6 +43,6 @@
     "defu": "^6.1.4",
     "execa": "^9.2.0",
     "pathe": "^1.1.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.0.0"
   }
 }

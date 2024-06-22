@@ -1,7 +1,7 @@
 import {
   DetectOptions,
-  detectPackageManager,
   PackageManager,
+  detectPackageManager,
 } from './detect.ts';
 
 export type ActionOptions = {
@@ -27,11 +27,12 @@ export type ActionOptions = {
 };
 
 export const isCorepackInstalled = async () => {
-  if (typeof Bun !== "undefined") {
-    const $ = await import('bun').then((module_) => module_.$);
-
+  if (typeof Bun !== 'undefined') {
     try {
-      await $`corepack --version`.quiet();
+      Bun.spawnSync(['corepack', '--version'], {
+        stdio: ['pipe', 'pipe', 'pipe'],
+      });
+
       return true;
     } catch {
       return false;
@@ -41,7 +42,7 @@ export const isCorepackInstalled = async () => {
   const execa = await import('execa').then((module_) => module_.execa);
 
   try {
-    await execa('corepack', ['--version']);
+    await execa('corepack', ['--verdsion']);
     return true;
   } catch {
     return false;
@@ -63,7 +64,7 @@ export const runCommand = async (
       ? ['corepack', [command, ...arguments_]]
       : [command, arguments_];
 
-  if (typeof Bun !== "undefined") {
+  if (typeof Bun !== 'undefined') {
     Bun.spawn([execaArguments[0], ...execaArguments[1]], {
       cwd: options.cwd,
       stdio: [
@@ -103,19 +104,21 @@ export const resolveArgs = (
     pm === 'yarn'
       ? [action, options.dev ? '--D' : '']
       : [
-        pm === 'npm' ? (action === 'add' ? 'install' : 'uninstall') : action,
-        options.dev ? '--D' : '',
-        options.global ? '-g' : '',
-      ]
+          pm === 'npm' ? (action === 'add' ? 'install' : 'uninstall') : action,
+          options.dev ? '--D' : '',
+          options.global ? '-g' : '',
+        ]
   ).filter(Boolean);
 };
 
 export const installDependencies = async (options: ActionOptions = {}) => {
   options.cwd = options.cwd ?? process.cwd();
-  const packageManager = options.packageManager || detectPackageManager({
-    cwd: options.cwd,
-    ...options.detectOptions,
-  });
+  const packageManager =
+    options.packageManager ||
+    detectPackageManager({
+      cwd: options.cwd,
+      ...options.detectOptions,
+    });
 
   await runCommand(packageManager, ['install'], options);
 };
@@ -125,10 +128,12 @@ export const addDependency = async (
   options: ActionWithArguments = {},
 ) => {
   options.cwd = options.cwd ?? process.cwd();
-  const packageManager = options.packageManager || detectPackageManager({
-    cwd: options.cwd,
-    ...options.detectOptions,
-  });
+  const packageManager =
+    options.packageManager ||
+    detectPackageManager({
+      cwd: options.cwd,
+      ...options.detectOptions,
+    });
   const arguments_ = resolveArgs(packageManager, options, 'add');
   const _packages = Array.isArray(packages) ? packages : [packages];
 
@@ -140,10 +145,12 @@ export const removeDependency = async (
   options: ActionWithArguments = {},
 ) => {
   options.cwd = options.cwd ?? process.cwd();
-  const packageManager = options.packageManager || detectPackageManager({
-    cwd: options.cwd,
-    ...options.detectOptions,
-  });
+  const packageManager =
+    options.packageManager ||
+    detectPackageManager({
+      cwd: options.cwd,
+      ...options.detectOptions,
+    });
 
   const arguments_ = resolveArgs(packageManager, options, 'remove');
   const _packages = Array.isArray(packages) ? packages : [packages];
